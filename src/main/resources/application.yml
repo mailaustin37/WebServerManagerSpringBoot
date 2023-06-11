@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+
+#General Configuration
+spring:
+  application:
+    name: Springboot Web Server Manager
+  profiles:
+    active: @profileActive@
+
+#Development Configuration
+---
+spring:
+  config:
+    active:
+      on-profile: development
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/webservermanager
+    username: influence
+    password: password
+
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    username:
+    password:
+    port: 587
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        debug: false
+    test-connection: false
+    protocol: smtp
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: false
+
+#Production Configuration
+---
+spring:
+  config:
+    active:
+      on-profile: production
